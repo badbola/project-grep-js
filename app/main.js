@@ -3,8 +3,11 @@ function matchPattern(inputLine, pattern) {
     return inputLine.includes(pattern);
   } else if (pattern === '\\d') {
     return /\d/.test(inputLine)
-  } else if (pattern=='\\w'){
+  } else if (pattern==='\\w'){
     return /\w/.test(inputLine)
+  }else if (pattern[0]==='[' && pattern[pattern.length-1]===']'){
+    console.log(pattern.slice(1,(pattern.length-1)));
+    return pattern.slice(1,(pattern.length-1)).includes(inputLine);
   }else {
     throw new Error(`Unhandled pattern ${pattern}`);
   }
