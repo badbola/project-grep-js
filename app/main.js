@@ -6,6 +6,7 @@ function matchPattern(inputLine, pattern) {
   } else {
     return new RegExp(newPattern).test(inputLine);
   }
+  
 }
 
 function main() {
