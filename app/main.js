@@ -1,24 +1,10 @@
 function matchPattern(inputLine, pattern) {
+
+  let newPattern = pattern.replace('//d','[0-9]').replace('\\w','[0-9a-zA-Z]');
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
-  } else if (pattern === '\\d') {
-    return /\d/.test(inputLine)
-  } else if (pattern==='\\w'){
-    return /\w/.test(inputLine)
-  }else if (pattern.length>2 && pattern[0]==='[' && pattern[pattern.length-1]===']' && pattern[1]=='^'){
-    console.log(pattern.slice(1,(pattern.length-1)));
-    let exclude = pattern.slice(2,(pattern.length-1))
-    for(let char of inputLine){
-      if(!exclude.includes(char)){
-        return true;
-      }
-    }
-    return false;
-  }else if (pattern[0]==='[' && pattern[pattern.length-1]===']'){
-    console.log(pattern.slice(1,(pattern.length-1)));
-    return pattern.slice(1,(pattern.length-1)).includes(inputLine);
-  }else {
-    throw new Error(`Unhandled pattern ${pattern}`);
+  } else {
+    return new RegExp(newPattern).test(inputLine);
   }
 }
 
