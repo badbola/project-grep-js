@@ -5,6 +5,15 @@ function matchPattern(inputLine, pattern) {
     return /\d/.test(inputLine)
   } else if (pattern==='\\w'){
     return /\w/.test(inputLine)
+  }else if (pattern.length>2 && pattern[0]==='[' && pattern[pattern.length-1]===']' && pattern[1]=='^'){
+    console.log(pattern.slice(1,(pattern.length-1)));
+    let exclude = pattern.slice(2,(pattern.length-1))
+    for(let char of inputLine){
+      if(!exclude.includes(char)){
+        return true;
+      }
+    }
+    return false;
   }else if (pattern[0]==='[' && pattern[pattern.length-1]===']'){
     console.log(pattern.slice(1,(pattern.length-1)));
     return pattern.slice(1,(pattern.length-1)).includes(inputLine);
